@@ -1,10 +1,24 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { close, logo, menu } from '../assets';
 import { navLinks } from '../constants';
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
+
+  useEffect(() => {
+    const closeNavbar = () => {
+      setToggle(false);
+    };
+
+    if (toggle) {
+      document.body.addEventListener('click', closeNavbar);
+      return () => {
+        document.body.removeEventListener('click', closeNavbar);
+      };
+    }
+  }, [toggle]);
+
   return (
     <nav className="w-full flex py-6 justify-between items-center navbar">
       <img src={logo} alt="hoobank" className="w-[124px] h-[32px]" />
@@ -26,7 +40,10 @@ const Navbar = () => {
           src={toggle ? close : menu}
           alt="menu"
           className="w-[28px] h-[28px] object-contain"
-          onClick={() => setToggle((prev) => !prev)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setToggle((prev) => !prev);
+          }}
         />
 
         <div
@@ -42,7 +59,15 @@ const Navbar = () => {
                   index === navLinks.length - 1 ? 'mb-0' : 'mb-4'
                 } text-white`}
               >
-                <a href={`#${nav.id}`}>{nav.title}</a>
+                <a
+                  href={`#${nav.id}`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setToggle(false);
+                  }}
+                >
+                  {nav.title}
+                </a>
               </li>
             ))}
           </ul>
