@@ -15,7 +15,7 @@ Modern SPA with Vite, ReactJS & TailwindCSS.
 
 ## General Information
 
-![Demo](..assets/demo.svg)
+![Demo](..assets/demo.svg?raw=true)
 Live demo with Github Pages [here](https://bricard-dev.github.io/hoobank-interface/).
 
 This project is inspired by a youtube video project created by [JavaScript Mastery](https://www.youtube.com/@javascriptmastery). It aims to improve my skills in the JavaScript framework ReactJS and CSS framework Tailwind.
